@@ -7,7 +7,7 @@ export const register = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const findUser = await UserModel.findOne({ email: emailToFind });
+    const findUser = await UserModel.findOne({ email });
 
     if (findUser) {
       return res.status(404).json({
