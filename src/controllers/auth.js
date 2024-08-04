@@ -1,7 +1,25 @@
-// Register
 export const register = async (req, res) => {
   try {
+    const { email, password } = req;
+
+    if (!email) {
+      return res.status(404).json({
+        message: "Email is required",
+      });
+    }
+
+    if (!password) {
+      return res.status(404).json({
+        message: "Password is required",
+      });
+    }
+
+    const user = {
+      ...req,
+    };
+
     res.json({
+      user,
       message: "Work",
     });
   } catch (err) {
