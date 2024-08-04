@@ -1,6 +1,6 @@
 export const register = async (req, res) => {
   try {
-    const { email, password } = req;
+    const { email, password } = req.body;
 
     if (!email) {
       return res.status(404).json({
@@ -15,7 +15,7 @@ export const register = async (req, res) => {
     }
 
     const user = {
-      ...req,
+      ...req.body,
     };
 
     res.json({
