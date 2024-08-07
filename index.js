@@ -18,6 +18,11 @@ app.use(express.json());
 // Auth
 app.use("/api/auth", authRoute);
 
+app.post("/api/test", (req, res) => {
+  console.log("Request received:", req.body);
+  res.send(`POST request received with data: ${JSON.stringify(req.body)}`);
+});
+
 mongoose
   .connect(process.env.MONGO_DB_CONNECT)
   .then(() => {
