@@ -1,4 +1,5 @@
 import { Router } from "express";
+import passport from "passport";
 
 import { registerValidator } from "../validations/auth.js";
 
@@ -13,5 +14,11 @@ router.post("/register", registerValidator, register);
 router.post("/login", login);
 
 router.get("/me", checkAuth, getMe);
+
+router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+router.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: "/" }), (req, res) => {
+  res.redirect("/dashboard");
+});
 
 export default router;

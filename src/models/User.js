@@ -23,6 +23,7 @@ const UserSchema = new mongoose.Schema(
       city: { type: String, default: "" },
       zipCode: { type: String, default: "" },
     },
+    googleId: String,
   },
 
   {

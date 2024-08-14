@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+import passport from "passport";
+import session from "express-session";
 
 import authRoute from "./src/routes/auth.js";
 
@@ -15,13 +17,12 @@ const PORT = process.env.PORT || 5555;
 app.use(cors());
 app.use(express.json());
 
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Auth
 app.use("/api/auth", authRoute);
-
-app.post("/api/test", (req, res) => {
-  console.log("Request received:", req.body);
-  res.send(`POST request received with data: ${JSON.stringify(req.body)}`);
-});
 
 mongoose
   .connect(process.env.MONGO_DB_CONNECT)
